@@ -41,6 +41,7 @@
     width: 90px;
     height: 60px;
     background-color: #303030;
+    border-radius: 10px;
 
     display: flex;
     justify-content: center;

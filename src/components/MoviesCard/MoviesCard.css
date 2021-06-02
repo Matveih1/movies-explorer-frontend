@@ -1,16 +1,17 @@
 .card {
   background-color: #222;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .card__image {
   width: 100%;
   height: 203px;
   object-fit: cover;
-  cursor: pointer;
 }
 
 .card__info {
+  height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,6 +31,25 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.card__delete {
+  display: none;
+
+  min-width: 30px;
+  height: 30px;
+  color: #fff;
+  font-size: 7px;
+  
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+
+  transition: opacity .5s linear;
+  transition: transform 0.3s;
 }
 
 .card__like {
@@ -98,3 +118,15 @@
     margin: 0 0 0 10px;
   }
 }
+
+.card__title:hover~.card__delete {
+  display: block;
+} 
+
+.card__info:hover~.card__delete {
+  display: block;
+} 
+
+.card:hover~.card__delete {
+  display: block;
+} 

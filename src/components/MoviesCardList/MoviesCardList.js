@@ -21,7 +21,7 @@ function MoviesCardList (props) {
       />
       <MoviesCard
         src={image}
-        name="33 слова о дизайне"
+        name="Киноальманах «100 лет дизайна»"
         time="13:40"
         isLiked = {true}
       />
