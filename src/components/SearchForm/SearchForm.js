@@ -5,6 +5,12 @@ import search_ico from '../../images/search.svg';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
+
+  function onSearch(e) {
+    e.preventDefault();
+    props.onSearch();
+  }
+
   return(
     <section className="search">
       <form className="search-form">
@@ -13,12 +19,13 @@ function SearchForm(props) {
             className = "search-input"
             type      = "text"
             name      = "search-input"
-            required 
+            // required 
             placeholder = "Фильм"
           />
           <button 
-            className="search-button"
-            type="submit"
+            className = "search-button"
+            type = "submit"
+            onClick = {onSearch}
           >
             <img className="search-ico" src={search_ico} alt="Найти"/>
           </button>

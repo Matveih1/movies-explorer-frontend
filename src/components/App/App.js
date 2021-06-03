@@ -10,10 +10,15 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 
+import moviesApi from '../../utils/MoviesApi';
+import { MoviesContext } from '../../contexts/contexts'
+
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const history = useHistory();
+
+  const [movies, setMovies] = React.useState([]);
 
   function handleLogin({ email, password}) {
     console.log(email);
@@ -28,8 +33,27 @@ function App() {
     history.push('/sing-in');
   }  
 
+  function handleMovies() {
+    console.log('handleMovies');
+    // if (movies.length === 0) {
+    //   setWaiting(true);
+
+      moviesApi
+        .getMovies()
+        .then((data) => { 
+          setMovies(data);
+          console.log(data);
+          // setWaiting(false);
+        })
+        .catch((err) => {
+          console.log(err)
+          // setWaiting(false);
+        });
+    // }
+  }
+  
   return (
-    <>
+    <MoviesContext.Provider value={movies}>
       <Switch>
         <Route exact path="/">
           <Main
@@ -47,7 +71,9 @@ function App() {
           />  
         </Route>
         <Route path="/movies">
-          <Movies/>
+          <Movies
+            handleMovies = {handleMovies}
+          />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies/>
@@ -59,7 +85,7 @@ function App() {
           <NotFound/>
         </Route>
       </Switch>    
-    </>
+    </MoviesContext.Provider>
   );
 }
 

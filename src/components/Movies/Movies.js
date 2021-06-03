@@ -10,7 +10,9 @@ function Movies(props) {
   return(
     <>
       <Header/>
-      <SearchForm/>
+      <SearchForm
+        onSearch = {props.handleMovies}
+      />
       <MoviesCardList/>
       <Footer/>
     </>
