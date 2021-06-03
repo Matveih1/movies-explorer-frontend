@@ -1,0 +1,30 @@
+
+.label {
+	width: 100%;
+}
+
+.label__title {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 12px;
+	color: #8B8B8B;
+}
+
+.input {
+  color: #FFF;
+  background-color: #2F2F2F;
+
+  font-size: 13px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.2;
+  
+  margin: 10px 0 20px 0;
+  padding: 15px 15px;
+  width: calc(100% - 30px);
+
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
