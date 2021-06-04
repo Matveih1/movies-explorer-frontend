@@ -8,14 +8,14 @@ import Footer from '../Footer/Footer';
 
 function Movies(props) {
   return(
-    <>
+    <page className="movies">
       <Header/>
       <SearchForm
         onSearch = {props.handleMovies}
       />
       <MoviesCardList/>
       <Footer/>
-    </>
+    </page>
   )
 }
 

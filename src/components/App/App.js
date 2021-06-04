@@ -9,6 +9,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
+import Preloader from "../Preloader/Preloader";
 
 import moviesApi from '../../utils/MoviesApi';
 import { MoviesContext } from '../../contexts/contexts'
@@ -16,6 +17,7 @@ import { MoviesContext } from '../../contexts/contexts'
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const history = useHistory();
 
   const [movies, setMovies] = React.useState([]);
@@ -36,18 +38,19 @@ function App() {
   function handleMovies() {
     console.log('handleMovies');
     // if (movies.length === 0) {
-    //   setWaiting(true);
+      setLoading(true);
 
       moviesApi
         .getMovies()
         .then((data) => { 
           setMovies(data);
-          console.log(data);
-          // setWaiting(false);
+          // console.log(data);
+          // console.log(movies.image.url);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err)
-          // setWaiting(false);
+          setLoading(false);
         });
     // }
   }
@@ -85,6 +88,7 @@ function App() {
           <NotFound/>
         </Route>
       </Switch>    
+      {loading && <Preloader/>}
     </MoviesContext.Provider>
   );
 }
