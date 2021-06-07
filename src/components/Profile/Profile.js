@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './Profile.css';
 import Header from '../Header/Header';
@@ -41,9 +40,15 @@ function Profile(props) {
                         Редактировать
                     </button>
                 </form>
-                <Link to="/sign-out" className="profile__signout">
+                {/* <Link to="/sign-out" className="profile__signout">
                     Выйти из аккаунта
-                </Link>
+                </Link> */}
+                <button
+                    className = "profile__signout"
+                    onClick = {props.onSignOut}
+                >
+                    Выйти из аккаунта
+                </button>
             </section>
         </>
     )

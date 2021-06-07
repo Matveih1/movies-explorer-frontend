@@ -11,9 +11,12 @@ function Movies(props) {
     <page className="movies">
       <Header/>
       <SearchForm
-        onSearch = {props.handleMovies}
+        onSearch = {props.onMovies}
       />
-      <MoviesCardList/>
+      <MoviesCardList
+        onLikeCard = {props.handleLikeCard}
+        onDeleteCard = {props.handleDeleteMovie}
+      />
       <Footer/>
     </page>
   )

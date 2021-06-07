@@ -13,7 +13,7 @@ function Header(props) {
     const isMobile = useMediaQuery({ query: '(max-width: 1023px)' });
     
 
-    const headerClassName = `header ${props.loggedIn && 'header__start'}`; 
+    const headerClassName = `header ${location.pathname === '/' && 'header__start'}`; 
 
     function handleLogin() {
         history.push('/sing-in');
@@ -28,7 +28,7 @@ function Header(props) {
             <Link to='/'>
                 <img className="header__logo" src={logo} alt="Лого"/>
             </Link>    
-            {props.loggedIn ? (
+            {location.pathname === '/' ? (
                 <div className="header__links">
                     <Link to="/sing-up" className="header__link">
                     Регистрация

@@ -4,13 +4,14 @@ import { useMediaQuery } from "react-responsive";
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { MoviesContext } from "../../contexts/contexts";
+import { MoviesContext, SavedMoviesContext } from "../../contexts/contexts";
 
 function MoviesCardList (props) {
 
   const location = useLocation();
   const movies = React.useContext(MoviesContext);
-  
+  const savedMovies = React.useContext(SavedMoviesContext);
+
   const isTablet = useMediaQuery({ query: "(max-width: 480px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const initState = (isMobile ? 5 : isTablet ? 8 : 12);
@@ -26,17 +27,24 @@ function MoviesCardList (props) {
     <>
       <section className = "card-list">
         {
-          movies.slice(0, numberOfCards).map(movie => (
-            <MoviesCard
-              // key={card._id}
-              movie={movie}
-              isLiked = {false}
-              // onCardClick={onCardClick}
-              // onCardLike={onCardLike}
-              // onCardDelete={onCardDelete}
-            />
+          location.pathname === '/movies' 
+          ? movies.slice(0, numberOfCards).map(movie => (
+              <MoviesCard
+                movie = {movie}              
+                onLikeCard = {props.onLikeCard}
+                onDeleteCard = {props.onDeleteCard}
+              />
+              ) 
             )
-          )               
+          : savedMovies.map(movie => (
+              <MoviesCard
+                // key={card.movieId}
+                movie = {movie}              
+                onLikeCard = {props.onLikeCard}
+                onDeleteCard = {props.onDeleteCard}
+              />
+              )
+            )           
         }
       </section>
       {location.pathname === '/movies' && isLastCard &&
