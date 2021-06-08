@@ -10,6 +10,7 @@ function MoviesCardList(props) {
   const location = useLocation();
   const movies = React.useContext(MoviesContext);
   // const savedMovies = React.useContext(SavedMoviesContext);
+  const [filteredMovies, setFilteredMovies] = React.useState([movies]);
 
   const isTablet = useMediaQuery({ query: "(max-width: 480px)" });
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -22,11 +23,38 @@ function MoviesCardList(props) {
     setNumberOfCards((prevValue) => prevValue + increment);
   }
 
+  React.useEffect(() => {
+    let arr = [];
+    console.log("location.pathname = ", location.pathname);
+
+    switch (location.pathname) {
+      case "/movies":
+        arr = JSON.parse(localStorage.getItem("moviesFilteredFilms"));
+        console.log("arr = JSON.parse = ", arr);
+
+        break;
+      case "/saved-movies":
+        arr = JSON.parse(localStorage.getItem("savedMoviesFilteredFilms"));
+
+        break;
+      default:
+        console.log("Что-то пошло не так");
+    }
+
+    console.log("arr.length = ", filteredMovies);
+
+    if (arr && arr.length > 0) {
+      setFilteredMovies(arr);
+    } else {
+      setFilteredMovies(movies);
+    }
+  }, [movies]);
+
   return (
     <>
       <section className="card-list">
         {location.pathname === "/movies"
-          ? movies
+          ? filteredMovies
               .slice(0, numberOfCards)
               .map((movie) => (
                 <MoviesCard
@@ -36,7 +64,7 @@ function MoviesCardList(props) {
                   onDeleteCard={props.onDeleteCard}
                 />
               ))
-          : movies.map((movie) => (
+          : filteredMovies.map((movie) => (
               <MoviesCard
                 key={movie.movieId}
                 movie={movie}

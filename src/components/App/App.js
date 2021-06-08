@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { useLocation, Route, Switch, useHistory } from "react-router-dom";
 
 import "./App.css";
 import Login from "../Login/Login";
@@ -20,6 +20,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   const [currentUser, setCurrentUser] = React.useState([]);
   const [movies, setMovies] = React.useState([]);
@@ -45,9 +46,24 @@ function App() {
         return arr;
       }, []);
     }
+    switch (location.pathname) {
+      case "/movies":
+        localStorage.setItem("moviesSearchFilm", searchFilm);
+        localStorage.setItem("moviesShortFilm", JSON.stringify(shortFilm));
 
-    //return result;
-    console.log("!!!!filteredMovies", source, searchFilm, shortFilm, result);
+        localStorage.setItem("moviesFilteredFilms", JSON.stringify(result));
+
+        break;
+      case "/saved-movies":
+        localStorage.setItem("savedMoviesSearchFilm", searchFilm);
+        localStorage.setItem("savedMoviesShortFilm", JSON.stringify(shortFilm));
+        localStorage.setItem("savedMoviesFilteredFilms", JSON.stringify(result));
+
+        break;
+      default:
+        console.log("Что-то пошло не так");
+    }
+
     setMoviesFilter([...[], ...result]);
   }
 
@@ -67,6 +83,10 @@ function App() {
 
         return current;
       });
+
+      if (moviesFilter.length > 0 && location.pathname === "/movies") {
+        localStorage.setItem("moviesFilteredFilms", JSON.stringify(moviesFilter));
+      }
     }
 
     // setMoviesLike(movies);
@@ -232,6 +252,7 @@ function App() {
 
         if (index > -1) {
           moviesFilter.splice(index, 1);
+          localStorage.setItem("savedMoviesFilteredFilms", JSON.stringify(moviesFilter));
         }
 
         return data;
@@ -273,9 +294,9 @@ function App() {
     setFieldLike();
   }, [moviesFilter, savedMovies]);
 
-  // React.useEffect(() => {
-  //   tokenCheck();
-  // }, [tokenCheck])
+  React.useEffect(() => {
+    tokenCheck();
+  }, [])
 
   return (
     <MoviesContext.Provider value={moviesLike}>

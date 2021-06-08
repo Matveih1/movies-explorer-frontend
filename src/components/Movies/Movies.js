@@ -7,9 +7,9 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
 function Movies(props) {
-  React.useEffect(() => {
-    props.onMovies("", false);
-  }, []);
+  // React.useEffect(() => {
+  //   props.onMovies("", false);
+  // }, []);
 
   return (
     <section className="movies">

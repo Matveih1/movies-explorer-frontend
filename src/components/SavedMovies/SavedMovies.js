@@ -7,9 +7,9 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
 function SavedMovies(props) {
-  React.useEffect(() => {
-    props.onMovies("", false);
-  }, []);
+  // React.useEffect(() => {
+  //   props.onMovies("", false);
+  // }, []);
 
   return (
     <>
