@@ -24,12 +24,12 @@ class Api {
 }
 
 
-  const api = new Api({
+  const moviesApi = new Api({
     baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
     headers: {
       'Content-Type': 'application/json'
     }
   }); 
   
-  export default api;
+  export default moviesApi;
   

@@ -1,15 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import './FilterCheckbox.css';
+import "./FilterCheckbox.css";
 
-function FilterCheckbox() {
-    return (
-        <label className="switch">
-            <input className="switch__input" type="checkbox"></input>
-            <span className="switch__slider"></span>
-        </label>
-
-    )
+function FilterCheckbox(props) {
+  return (
+    <label className="switch">
+      <input
+        className="switch__input"
+        type="checkbox"
+        onChange={props.onChange}
+        checked={props.checked}
+      ></input>
+      <span className="switch__slider"></span>
+    </label>
+  );
 }
 
 export default FilterCheckbox;

@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import './Register.css';
 import Input from '../Form/Input/Input';
 import Form from '../Form/Form';
 
-import './Register.css';
-
-function Login(props) {
+function Register(props) {
 
   const initialData = {
     email: '',
     password: '',
+    name: '',
   }
 
   const [data, setData] = React.useState(initialData);
@@ -23,7 +23,7 @@ function Login(props) {
   }
 
   function resetForm() {
-    setData(initialData);
+    // setData(initialData);
   }
 
   function handleSubmit(e){
@@ -34,9 +34,9 @@ function Login(props) {
       return;
     }
 
-    props.onLogin(data)
-      // .then(resetForm)
-      // .catch(err => console.log(err));
+    props.onRegister(data)
+      .then(resetForm)
+      .catch(err => console.log(err));
   } 
 
   return (
@@ -81,4 +81,4 @@ function Login(props) {
   )
 }
 
-export default Login;
+export default Register;

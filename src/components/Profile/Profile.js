@@ -1,16 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './Profile.css';
 import Header from '../Header/Header';
+import { CurrentUserContext } from "../../contexts/contexts";
 
 function Profile(props) {
+
+    let currentUser = React.useContext(CurrentUserContext);
+
+    const [name, setName] = React.useState(currentUser.name);
+    const [email, setEmail] = React.useState(currentUser.email);
+    const [buttonDisabled, setButtonDisabled] = React.useState(false);
+
+    React.useEffect(() => {
+        setButtonDisabled([name, email].findIndex((item) => item === "") !== -1);
+    }, [name, email]);
+
+    function handleNameChange(e) {
+        setName(e.target.value);
+    }
+
+    function handleEmailChange(e) {
+        setEmail(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        props.onUpdate(name, email);
+    }
+
     return (
         <>
             <Header/>
             <section className="profile">
                 <h2 className="profile__title">Привет, Виталий!</h2>
-                <form className="profile__form">
+                <form 
+                    className = "profile__form"
+                    onSubmit = {handleSubmit}
+                >
                     <label className="profile__container">
                         <span className="profile__label">
                             Имя
@@ -21,7 +49,8 @@ function Profile(props) {
                             name="name"
                             placeholder="Введите имя"
                             required
-                            value={props.name}
+                            value={name}
+                            onChange={handleNameChange}
                         />
                     </label>
                     <label className="profile__container">
@@ -31,19 +60,27 @@ function Profile(props) {
                         <input
                             type="text"
                             className="profile__input"
-                            name="name"
-                            placeholder="Введите имя"
+                            name="email"
+                            placeholder="Введите почту"
                             required
-                            value={props.email}
+                            value={email}
+                            onChange={handleEmailChange}
                         />
                     </label>
-                    <button className="profile__button" type="submit">
+                    <button 
+                        className = "profile__button" 
+                        type = "submit"
+                        disabled = {buttonDisabled}
+                    >
                         Редактировать
                     </button>
                 </form>
-                <Link to="/sign-out" className="profile__signout">
+                <button
+                    className = "profile__signout"
+                    onClick = {props.onSignOut}
+                >
                     Выйти из аккаунта
-                </Link>
+                </button>
             </section>
         </>
     )
