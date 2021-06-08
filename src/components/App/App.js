@@ -230,9 +230,9 @@ function App() {
     setFieldLike()
   }, [moviesFilter, savedMovies])
 
-  // React.useEffect(() => {
-  //   tokenCheck();
-  // }, [tokenCheck])
+  React.useEffect(() => {
+    tokenCheck();
+  }, [])
   
   return (
     <MoviesContext.Provider value={moviesLike}>

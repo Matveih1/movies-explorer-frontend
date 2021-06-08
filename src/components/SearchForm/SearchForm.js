@@ -34,7 +34,7 @@ function SearchForm(props) {
             className = "search-input"
             type      = "text"
             name      = "search-input"
-            // required 
+            required 
             placeholder = "Фильм"
             onChange = {handleSearchFilmChange}
           />
