@@ -5,6 +5,8 @@ import './MoviesCard.css';
 
 function MoviesCard (props) {
 
+  console.log('props.onDeleteCard', props.onDeleteCard);
+
   const location = useLocation();
   const cardLikeButtonClassName = `card__like ${props.movie.liked && 'card__like_active'}`; 
   const image = location.pathname === '/saved-movies' 

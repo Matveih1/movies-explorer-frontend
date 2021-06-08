@@ -49,6 +49,7 @@
     font-weight: 400;
     font-style: normal;
     text-align: right;
+    color: #fff;
 
     background-color: #202020;
     border: none;
@@ -68,6 +69,7 @@
   
     padding: 0;
     margin: 220px 0 0 0;
+    cursor: pointer;
 }
 
 .profile__signout{

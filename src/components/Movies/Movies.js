@@ -7,6 +7,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function Movies(props) {
+  console.log('props.handleDeleteMovie', props.handleDeleteMovie);
   return(
     <page className="movies">
       <Header/>

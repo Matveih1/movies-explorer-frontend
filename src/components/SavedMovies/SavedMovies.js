@@ -11,7 +11,9 @@ function SavedMovies(props) {
     <>
       <Header/>
       <SearchForm/>
-      <MoviesCardList/>
+      <MoviesCardList
+        onDeleteCard = {props.handleDeleteMovie}
+      />
       <Footer/>
     </>
   )

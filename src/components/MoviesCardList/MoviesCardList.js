@@ -8,6 +8,8 @@ import { MoviesContext, SavedMoviesContext } from "../../contexts/contexts";
 
 function MoviesCardList (props) {
 
+  console.log('MoviesCardList props.onDeleteCard', props.onDeleteCard);
+
   const location = useLocation();
   const movies = React.useContext(MoviesContext);
   const savedMovies = React.useContext(SavedMoviesContext);
@@ -30,6 +32,7 @@ function MoviesCardList (props) {
           location.pathname === '/movies' 
           ? movies.slice(0, numberOfCards).map(movie => (
               <MoviesCard
+                key = {movie.id}
                 movie = {movie}              
                 onLikeCard = {props.onLikeCard}
                 onDeleteCard = {props.onDeleteCard}
@@ -38,7 +41,7 @@ function MoviesCardList (props) {
             )
           : savedMovies.map(movie => (
               <MoviesCard
-                // key={card.movieId}
+                key = {movie.movieId}
                 movie = {movie}              
                 onLikeCard = {props.onLikeCard}
                 onDeleteCard = {props.onDeleteCard}

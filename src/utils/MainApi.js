@@ -40,6 +40,26 @@ class Api {
     .then(this._returnRes)
   }; 
 
+  getUser() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: this.getHeaders(),
+    })
+    .then(this._returnRes)
+  }
+
+  patchUsers = (name, email) => {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.getHeaders(),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    })
+    .then(this._returnRes)
+  };
+
   postMovie(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
