@@ -28,11 +28,11 @@ function App() {
   const [moviesLike, setMoviesLike] = React.useState([]);
   const [moviesFilter, setMoviesFilter] = React.useState([]);
 
-  function filteredMovies(searchFilm, shortFilm) {
+  function filteredMovies(source, searchFilm, shortFilm) {
     let result = [];
-  
-    if (movies && movies.length > 0 && searchFilm !== "") {
-      result = movies.reduce((arr, item) => {
+
+    if (source && source.length > 0 && searchFilm !== "") {
+      result = source.reduce((arr, item) => {
         if (shortFilm) {
           if (item.nameRU.includes(searchFilm) && item.duration <= 40) {
             arr.push(item);
@@ -42,13 +42,13 @@ function App() {
             arr.push(item);
           }
         }
-  
+
         return arr;
       }, []);
     }
 
     //return result;
-    console.log('filteredMovies', result)
+    console.log("!!!!filteredMovies", source, searchFilm, shortFilm, result);
     setMoviesFilter(result);
   }
 
@@ -157,25 +157,30 @@ function App() {
   } 
 
   function handleMovies(searchFilm, shortFilm) {
-    
-    console.log('handleMovies');
+    console.log("handleMovies");
     console.log(searchFilm, shortFilm);
 
     setLoading(true);
+
     if (movies.length === 0) {
-      moviesApi.getMovies()
-        .then((data) => { 
-          setMovies(data);
+      setLoading(true);
+
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          setMovies([...[], ...data]);
+          filteredMovies(data, searchFilm, shortFilm);
+
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           setLoading(false);
         });
+    } else {
+      filteredMovies(movies, searchFilm, shortFilm);
+      setLoading(false);
     }
-
-    filteredMovies(searchFilm, shortFilm);
-    
   }
 
   function handleSignOut() {
